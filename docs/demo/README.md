@@ -2,6 +2,9 @@
 
 Two recordings, both of the app running under `docker compose up`.
 
+**Stream them here: https://drive.google.com/drive/folders/14j_pSqa0bRpY1nPf6SPTKQSWXwVRYyj3?usp=sharing** GitHub does not play video
+files this size inline, so the copies in this folder download rather than stream.
+
 | File | What it covers |
 |---|---|
 | [`demo.mp4`](demo.mp4) | The app end to end: signing in, uploading a contract, the eight checklist findings with their quotes and page citations, two follow-up questions (one answered, one correctly refused), and a second user being refused access to the first user's contract through both the page and the API |

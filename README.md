@@ -6,6 +6,10 @@ quoted back at you and a page number so you can go and look.
 The thing I cared most about: it should never make anything up. If a contract has no
 auto-renewal clause, it says so. It does not tell you what contracts usually say.
 
+**Rather watch than build?** Two recordings, [here](https://drive.google.com/drive/folders/14j_pSqa0bRpY1nPf6SPTKQSWXwVRYyj3?usp=sharing): one walks the app end to end, the
+other covers the three files that carry the design. Same files are in
+[`docs/demo/`](docs/demo), though GitHub will not play them inline at that size.
+
 ---
 
 ## Running it
