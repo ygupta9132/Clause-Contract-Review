@@ -1,0 +1,99 @@
+# Four services: the Next.js app, a background worker, Postgres with pgvector, and Redis.
+#
+# Everything:            docker compose up --build
+# Just the dependencies: docker compose up postgres redis    (then npm run dev + npm run dev:worker)
+#
+# Host ports are shifted off the defaults (5433, 6380) so this does not collide with a Postgres
+# or Redis you already run locally.
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: contract
+      POSTGRES_PASSWORD: contract
+      POSTGRES_DB: contract_review
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U contract -d contract_review"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6380:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  # Runs the migration once, then exits. Both app containers wait for it.
+  migrate:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    command: ["npm", "run", "db:push"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://contract:contract@postgres:5432/contract_review
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    command: ["npm", "run", "start"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://contract:contract@postgres:5432/contract_review
+      REDIS_URL: redis://redis:6379
+      UPLOAD_DIR: /data/uploads
+    ports:
+      - "3000:3000"
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+  # The same image, running the queue consumer instead of the server. This is what keeps a 20 MB
+  # upload from blocking a request: the API enqueues and returns, this does the work.
+  worker:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    command: ["npm", "run", "worker"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://contract:contract@postgres:5432/contract_review
+      REDIS_URL: redis://redis:6379
+      UPLOAD_DIR: /data/uploads
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  redisdata:
+  uploads:

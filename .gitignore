@@ -1,0 +1,27 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Secrets. .env.example is committed, .env never is.
+.env
+.env.local
+.env*.local
+
+# Uploaded contracts stay out of git.
+data/
+uploads/
+
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+coverage/
+.drizzle/
+
+# build artefacts
+tsconfig.tsbuildinfo
+next-env.d.ts
