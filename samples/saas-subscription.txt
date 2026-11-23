@@ -1,0 +1,98 @@
+SOFTWARE AS A SERVICE SUBSCRIPTION AGREEMENT
+
+This Subscription Agreement ("Agreement") is entered into by and between Tessellate Cloud
+Inc., a Delaware corporation with offices at 500 Howard Street, San Francisco, CA 94105
+("Provider"), and Marigold Retail Group Limited, a company registered in England and Wales
+with registered number 09887123 and registered office at 22 Finsbury Square, London EC2A 1DX
+("Customer").
+
+1. DEFINITIONS
+
+1.1 "Service" means the Provider's hosted inventory analytics platform made available at
+app.tessellate.cloud.
+
+1.2 "Subscription Term" has the meaning given in clause 3.
+
+1.3 "Authorised Users" means employees of the Customer permitted to access the Service.
+
+2. GRANT OF ACCESS
+
+2.1 Provider grants Customer a non-exclusive, non-transferable right to access and use the
+Service during the Subscription Term for its internal business purposes, for up to two hundred
+(200) Authorised Users.
+
+3. SUBSCRIPTION TERM AND RENEWAL
+
+3.1 The initial Subscription Term begins on 1 March 2026 and continues for twenty-four (24)
+months.
+
+3.2 On expiry of the initial Subscription Term, this Agreement shall renew automatically for
+successive periods of twelve (12) months unless either party gives written notice of
+non-renewal at least ninety (90) days before the end of the then current term.
+
+3.3 Provider may increase fees on renewal by giving notice at least one hundred and twenty
+(120) days before the end of the then current term, provided any increase shall not exceed
+seven percent (7%).
+
+4. FEES AND PAYMENT
+
+4.1 Customer shall pay an annual subscription fee of USD 148,000, invoiced annually in advance.
+
+4.2 Invoices are payable within forty-five (45) days of the invoice date.
+
+4.3 Overdue amounts bear interest at one percent (1%) per month or the maximum rate permitted
+by law, whichever is lower.
+
+4.4 All fees are exclusive of taxes, which are the responsibility of the Customer.
+
+5. SERVICE LEVELS AND SUPPORT
+
+5.1 Provider shall use commercially reasonable efforts to make the Service available 99.9% of
+the time each calendar month, excluding scheduled maintenance.
+
+5.2 Service credits are the Customer's sole and exclusive remedy for failure to meet the
+availability commitment.
+
+6. DATA AND CONFIDENTIALITY
+
+6.1 Each party shall treat as confidential all information disclosed by the other that is
+marked confidential or would reasonably be understood to be confidential, and shall not
+disclose it to any third party except to its personnel and advisers who need to know it.
+
+6.2 These obligations survive for five (5) years after termination of this Agreement.
+
+6.3 Customer Data remains the property of the Customer. Provider shall process it only to
+provide the Service and in accordance with the Data Processing Addendum.
+
+7. LIMITATION OF LIABILITY
+
+7.1 Neither party shall be liable for any indirect, special, incidental or consequential
+damages, nor for loss of profits, revenue, data or anticipated savings, however caused.
+
+7.2 Each party's total aggregate liability arising out of or in connection with this Agreement
+shall not exceed the total fees paid or payable by Customer in the twelve (12) months
+preceding the first event giving rise to liability.
+
+7.3 Clause 7.1 and 7.2 do not limit liability for death or personal injury caused by
+negligence, fraud, or either party's indemnification obligations under clause 8.
+
+8. INDEMNITY
+
+8.1 Provider shall indemnify Customer against third party claims that the Service infringes
+any patent, copyright or trade secret.
+
+9. TERMINATION
+
+9.1 Either party may terminate this Agreement for material breach if the breach is not cured
+within thirty (30) days of written notice specifying the breach.
+
+9.2 Customer may terminate for convenience at the end of any Subscription Term by giving the
+notice required under clause 3.2. Fees paid are non-refundable.
+
+10. GOVERNING LAW AND DISPUTES
+
+10.1 This Agreement is governed by the laws of the State of Delaware, without regard to its
+conflict of law principles.
+
+10.2 The parties submit to the exclusive jurisdiction of the state and federal courts located
+in Wilmington, Delaware.

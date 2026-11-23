@@ -1,0 +1,83 @@
+EMPLOYMENT AGREEMENT
+
+THIS AGREEMENT is made on 12 January 2026 between Kestrel Software Labs Private Limited,
+having its registered office at 7th Floor, Prestige Atrium, Residency Road, Bengaluru 560025
+("the Company"), and Ms. Ananya Rao, residing at 212 Jubilee Hills, Hyderabad 500033
+("the Employee").
+
+1. APPOINTMENT
+
+1.1 The Company appoints the Employee as Senior Software Engineer, reporting to the Head of
+Engineering.
+
+1.2 The Employee shall devote her full working time and attention to the business of the
+Company and shall not engage in any other employment or consultancy without the prior written
+consent of the Company.
+
+2. COMMENCEMENT AND PROBATION
+
+2.1 The Employee's employment commences on 2 February 2026 and continues until terminated in
+accordance with clause 7.
+
+2.2 The first six (6) months of employment are a probationary period, during which either
+party may terminate on seven (7) days written notice.
+
+3. REMUNERATION
+
+3.1 The Company shall pay the Employee an annual cost to company of INR 32,00,000 (thirty two
+lakh rupees), payable in equal monthly instalments on or before the last working day of each
+calendar month.
+
+3.2 The Employee is eligible for an annual performance bonus of up to 15% of fixed pay, at the
+discretion of the Company and subject to the Employee being in service and not under notice on
+the date of payment.
+
+3.3 All payments are subject to deduction of tax at source and statutory contributions.
+
+4. HOURS AND LEAVE
+
+4.1 Normal working hours are 9.5 hours per day, five days a week, with flexibility as required
+by the role.
+
+4.2 The Employee is entitled to 24 days of paid leave per calendar year, in addition to public
+holidays notified by the Company.
+
+5. CONFIDENTIALITY
+
+5.1 The Employee shall not, during employment or at any time after it ends, disclose to any
+person any confidential information concerning the business, clients, finances or technology of
+the Company.
+
+5.2 The obligation in clause 5.1 continues without limit of time in respect of trade secrets,
+and for three (3) years following the end of employment in respect of other confidential
+information.
+
+6. INTELLECTUAL PROPERTY
+
+6.1 All intellectual property created by the Employee in the course of employment vests in the
+Company absolutely.
+
+7. TERMINATION
+
+7.1 After probation, either party may terminate this Agreement by giving ninety (90) days
+written notice, or payment of salary in lieu of notice.
+
+7.2 The Company may terminate the Employee's employment with immediate effect and without
+notice in the event of gross misconduct, wilful breach of this Agreement, or conviction of an
+offence involving moral turpitude.
+
+8. NON-SOLICITATION
+
+8.1 For twelve (12) months after the end of employment, the Employee shall not solicit any
+client of the Company with whom she had material dealings in the final twelve months of
+employment.
+
+9. GOVERNING LAW
+
+9.1 This Agreement is governed by the laws of India, and the courts at Bengaluru shall have
+exclusive jurisdiction.
+
+10. ENTIRE AGREEMENT
+
+10.1 This Agreement supersedes all prior discussions and constitutes the entire agreement
+between the parties in relation to the Employee's employment.
