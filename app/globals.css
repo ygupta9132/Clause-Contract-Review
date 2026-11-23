@@ -1,0 +1,764 @@
+@import "tailwindcss";
+
+/**
+ * Design system: minimal.
+ *
+ * Neutral surfaces, one accent, and a lot of whitespace. The rules that keep it clean:
+ *
+ *   - one accent colour, used only for the primary action and links
+ *   - greys do the structural work; borders are hairlines, not boxes
+ *   - shadows only where something genuinely floats
+ *   - one obvious action per screen, at a size you cannot miss
+ *   - type carries the hierarchy, not decoration
+ *
+ * Light only, deliberately: a contract is something you read, and a half-converted dark mode
+ * is worse than none.
+ */
+:root {
+  --bg: #f4f5f7;
+  --s: #ffffff;
+  --s2: #fafafb;
+  --line: #e7e8ec;
+  --line-strong: #d6d8de;
+  --txt: #15161a;
+  --muted: #6e7079;
+  --accent: #d12b20;
+  --accent-bright: #e5322d;
+  --accent-hover: #c62a25;
+  --accent-soft: #fdecea;
+  --green: #11724a;
+  --green-bg: #e6f4ec;
+  --amber: #8a5d10;
+  --amber-bg: #fcf2dd;
+  --danger: #a32718;
+  --danger-bg: #fcebe8;
+  --neutral: #6e7079;
+  --neutral-bg: #eeeff2;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  /*
+   * The header is sticky and 68px tall, so an anchor jumped to from a link lands underneath it
+   * without this. scroll-padding-top reserves that space for every in-page jump.
+   */
+  scroll-padding-top: 92px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--txt);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------- header -- */
+.top {
+  height: 68px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  /*
+   * Opaque, not translucent. With a semi-transparent header the text scrolling underneath
+   * stays faintly visible through it, which reads as content being clipped rather than as a
+   * layer it passes behind. Backdrop blur did not hide it either.
+   */
+  background: var(--s);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+}
+/*
+ * An inner container rather than padding derived from 100vw. That unit includes the vertical
+ * scrollbar while the page content is laid out in the narrower space beside it, so the two
+ * disagree by the scrollbar width the moment the page scrolls.
+ */
+.top-inner {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--txt);
+}
+.mark {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--accent-bright);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+.brand-sub {
+  font-weight: 400;
+  color: var(--muted);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.nav a {
+  color: inherit;
+  text-decoration: none;
+}
+.nav a:hover {
+  color: var(--txt);
+}
+
+/* ----------------------------------------------------------------- layout -- */
+.wrap {
+  max-width: 1040px;
+  margin: auto;
+  padding: 56px 24px 96px;
+}
+.muted {
+  color: var(--muted);
+}
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+h1 {
+  font-size: clamp(38px, 5.4vw, 60px);
+  line-height: 1.07;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  margin: 14px 0 0;
+}
+h2 {
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  margin: 4px 0 0;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- buttons -- */
+.btn {
+  padding: 11px 18px;
+  border-radius: 9px;
+  border: 1px solid var(--line-strong);
+  background: var(--s);
+  color: var(--txt);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.12s, border-color 0.12s;
+}
+.btn:hover:not(:disabled) {
+  background: var(--s2);
+  border-color: var(--muted);
+}
+.btn.primary {
+  background: var(--accent-bright);
+  border-color: var(--accent-bright);
+  color: #fff;
+}
+.btn.primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* The one unmissable action on a screen. */
+.btn.hero-cta {
+  font-size: 17px;
+  padding: 17px 40px;
+  border-radius: 11px;
+}
+
+/* ------------------------------------------------------------------- home -- */
+.hero {
+  max-width: 760px;
+  text-align: center;
+  margin: 40px auto 0;
+}
+.hero p {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 620px;
+  margin: 18px auto 34px;
+  color: var(--muted);
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.label {
+  margin: 80px 0 18px;
+  text-align: left;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+/* Hairline dividers instead of eight separate boxes: fewer edges, calmer page. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  text-align: left;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.tile {
+  padding: 20px 22px;
+  background: var(--s);
+}
+.tile b {
+  display: block;
+  font-weight: 650;
+  margin-bottom: 2px;
+}
+.tile small {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+/*
+ * Icons are inline SVG, not unicode glyphs. Characters like U+2311 have no glyph in most UI
+ * fonts and render as a tofu box, and the ones that do exist vary wildly in size and weight
+ * between fonts - so a row of them never looks like a set.
+ */
+.tile svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.tile .step {
+  display: block;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-style: normal;
+}
+
+.card,
+.contract {
+  background: var(--s);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+/* -------------------------------------------------------------- contracts -- */
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.head p {
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+.head-inline {
+  margin: 44px 0 14px;
+  align-items: center;
+}
+
+/*
+ * Upload: one large button, with drop as the quieter alternative underneath.
+ *
+ * A big dashed rectangle is the usual pattern, and it advertises the secondary action - drag
+ * and drop - at the size of the primary one. Most people click. So the button is the object
+ * on the page, and the whole panel stays a drop target for the people who drag.
+ */
+.drop {
+  position: relative;
+  display: block;
+  text-align: center;
+  padding: 56px 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--s);
+  margin-bottom: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.drop.dragging {
+  border-color: var(--accent);
+  border-style: dashed;
+  background: var(--accent-soft);
+}
+.drop-hint {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 16px 0 0;
+}
+.drop-limits {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+/*
+ * Hidden, but still rendered. `display: none` makes opening the picker depend on the browser
+ * agreeing to click an element that is not in the layout - Chrome does, other engines have
+ * refused. Out of view keeps .click() and showPicker() reliable everywhere.
+ */
+.drop input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.linklike {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.linklike:hover:not(:disabled) {
+  color: var(--accent-hover);
+}
+.linklike:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.contract {
+  padding: 15px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin: 8px 0;
+}
+.file {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  min-width: 0;
+}
+.fileicon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: var(--neutral-bg);
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  flex: none;
+}
+.file b {
+  display: block;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file small {
+  display: block;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex: none;
+}
+
+/* --------------------------------------------------------------- statuses -- */
+.status {
+  align-self: center;
+  flex: none;
+  border-radius: 999px;
+  padding: 4px 11px;
+  background: var(--green-bg);
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.status.warn {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+.status.neutral {
+  background: var(--neutral-bg);
+  color: var(--neutral);
+}
+.status.bad {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.back {
+  display: inline-block;
+  color: var(--muted);
+  margin-bottom: 24px;
+  text-decoration: none;
+  font-size: 14px;
+}
+.back:hover {
+  color: var(--txt);
+}
+.sub {
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+/* ------------------------------------------------------------------ review -- */
+.reviewhead {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+.progress {
+  width: 190px;
+  flex: none;
+}
+.progress small {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.bar {
+  height: 4px;
+  border-radius: 9px;
+  background: var(--line);
+  margin-top: 8px;
+  overflow: hidden;
+}
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent-bright);
+  transition: width 0.4s ease;
+}
+.section {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 28px 0 14px;
+}
+.findings {
+  display: grid;
+  gap: 10px;
+}
+.card {
+  padding: 20px 22px;
+}
+.cardtop {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  /* Without this the pill stretches to the height of the heading block beside it, and
+     border-radius: 999px turns it into a large oval instead of a pill hugging its label. */
+  align-items: flex-start;
+}
+.hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.summary {
+  margin: 14px 0 0;
+  color: var(--txt);
+}
+.quote {
+  background: var(--s2);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--line-strong);
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin-top: 14px;
+  font-style: italic;
+  color: #3f4047;
+  font-size: 14.5px;
+}
+.qfoot {
+  font-size: 12.5px;
+  color: var(--muted);
+  font-style: normal;
+  margin-top: 11px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.verified {
+  color: var(--green);
+  font-weight: 600;
+}
+.unverified {
+  color: var(--danger);
+  font-weight: 600;
+}
+/*
+ * One primary action per screen. Everything else is quiet, so the eye lands in one place.
+ * `quiet` is for secondary or destructive actions that should be reachable but not inviting.
+ */
+.toggle.quiet {
+  color: var(--muted);
+}
+.toggle.quiet:hover {
+  color: var(--danger);
+}
+.toggle {
+  border: 0;
+  background: none;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  padding: 0;
+  font-size: 12.5px;
+}
+.full {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: normal;
+}
+
+/* -------------------------------------------------------------------- chat -- */
+.chat {
+  margin-top: 56px;
+}
+.chat > p {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 8px 0 0;
+}
+.chatbox {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--s);
+  overflow: hidden;
+  margin-top: 18px;
+}
+.messages {
+  min-height: 200px;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.msg {
+  max-width: 78%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  background: var(--s2);
+  border: 1px solid var(--line);
+  font-size: 14.5px;
+}
+.msg.user {
+  align-self: flex-end;
+  background: var(--txt);
+  border-color: var(--txt);
+  color: #fff;
+}
+.msg.bot {
+  align-self: flex-start;
+}
+.cite {
+  border-top: 1px solid var(--line);
+  padding-top: 9px;
+  margin-top: 11px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.cite b {
+  color: var(--green);
+}
+.cite b.bad {
+  color: var(--danger);
+}
+.composer {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  border-top: 1px solid var(--line);
+  background: var(--s);
+}
+.composer input {
+  flex: 1;
+  min-width: 0;
+  background: var(--s);
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  padding: 12px 14px;
+  color: var(--txt);
+  outline: none;
+}
+.composer input:focus {
+  border-color: var(--accent);
+}
+.composer input:disabled {
+  background: var(--s2);
+}
+.suggest {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.suggest button {
+  border: 1px solid var(--line);
+  background: var(--s);
+  color: var(--muted);
+  border-radius: 99px;
+  padding: 7px 13px;
+  font-size: 12.5px;
+}
+.suggest button:hover:not(:disabled) {
+  border-color: var(--line-strong);
+  color: var(--txt);
+}
+.suggest button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------- misc + alerts -- */
+.notice {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  background: var(--s);
+}
+.notice.bad {
+  border-color: #f0cdc6;
+  background: var(--danger-bg);
+}
+.empty {
+  text-align: center;
+  padding: 56px 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--s);
+}
+.clause {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+.skeleton {
+  background: var(--neutral-bg);
+  border-radius: 6px;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.pulse-soft {
+  animation: pulse-soft 1.6s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------ clerk -- */
+/*
+ * Clerk's default avatar is a remote image from img.clerk.com with a purple gradient baked in,
+ * so it cannot be recoloured with CSS. It is replaced with a red circle and a white figure.
+ *
+ * The selector matches only generated defaults: their URL carries a base64 payload beginning
+ * `eyJ0eXBlIjoiZGVmYXVsdCI`, which decodes to `{"type":"default"`. A user who has uploaded a
+ * real profile picture still gets their picture.
+ */
+.cl-userButtonAvatarBox {
+  position: relative;
+  background: var(--accent-bright);
+}
+.cl-userButtonAvatarImage[src*="eyJ0eXBlIjoiZGVmYXVsdCI"] {
+  visibility: hidden;
+}
+.cl-userButtonAvatarBox:has(.cl-userButtonAvatarImage[src*="eyJ0eXBlIjoiZGVmYXVsdCI"])::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Ccircle cx='12' cy='8.6' r='3.9'/%3E%3Cpath d='M4.4 20.4c0-4.1 3.4-6.9 7.6-6.9s7.6 2.8 7.6 6.9z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 74%;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+@media (max-width: 650px) {
+  .top-inner { padding: 0 16px; }
+  .brand-sub { display: none; }
+  .wrap { padding: 36px 16px 64px; }
+  .grid { grid-template-columns: 1fr; }
+  .head, .reviewhead, .head-inline { align-items: flex-start; flex-direction: column; }
+  .progress { width: 100%; }
+  .contract { align-items: flex-start; flex-direction: column; }
+  .row { width: 100%; justify-content: space-between; }
+  .messages { min-height: 180px; max-height: 65vh; padding: 14px; }
+  .msg { max-width: 92%; }
+  .hero { margin-top: 20px; }
+  .label { margin-top: 56px; }
+  .drop { padding: 40px 18px; }
+  .btn.hero-cta { width: 100%; }
+}
