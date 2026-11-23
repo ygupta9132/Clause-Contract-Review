@@ -1,0 +1,36 @@
+{
+  "_comment": [
+    "Expected checklist results for the sample contracts, used by scripts/evaluate.ts.",
+    "Each value is the set of statuses that count as correct. Most items have exactly one right",
+    "answer. A few are genuinely arguable, and those list more than one rather than pretending",
+    "the boundary is sharper than it is - an eval that scores a defensible answer as wrong tells",
+    "you nothing. The reason for each multi-value entry is given below it."
+  ],
+
+  "services-agreement.txt": {
+    "parties": ["found"],
+    "start_date_and_term": ["found"],
+    "payment_terms": ["found"],
+    "termination": ["found"],
+    "limitation_of_liability": ["found"],
+    "confidentiality": ["found"],
+    "governing_law": ["found"],
+    "auto_renewal": ["not_found"]
+  },
+
+  "mutual-nda.txt": {
+    "parties": ["found"],
+    "start_date_and_term": ["found"],
+    "payment_terms": ["not_found"],
+    "termination": ["found"],
+    "limitation_of_liability": ["not_found", "unclear"],
+    "confidentiality": ["found"],
+    "governing_law": ["found"],
+    "auto_renewal": ["found"]
+  },
+
+  "_notes": {
+    "mutual-nda.txt:limitation_of_liability": "The NDA has no liability clause. Clause 6.2 disclaims warranties, which is adjacent but is not a cap or an exclusion of loss, so both 'not_found' and 'unclear' are defensible.",
+    "services-agreement.txt:auto_renewal": "The term clause states an initial period and an expiry date and says nothing about renewal, so this must be 'not_found'. A model that answers 'found' here has assumed a standard clause, which is exactly the failure the task asks us to avoid."
+  }
+}
