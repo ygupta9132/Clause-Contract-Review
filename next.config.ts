@@ -8,6 +8,23 @@ const nextConfig: NextConfig = {
   // client that is not installed, and webpack reports that as a missing module even though
   // nothing calls it.
   serverExternalPackages: ["pdfjs-dist", "mammoth", "bullmq"],
+
+  /**
+   * The upload route accepts files up to 20 MB, and middleware runs on /api/*, so Next buffers
+   * the request body for the middleware to see. That buffer defaults to 10 MB, which silently
+   * truncated anything larger - the handler then saw a malformed multipart body and reported
+   * "send the file as multipart/form-data", which is both wrong and impossible to act on.
+   *
+   * 25 MB leaves headroom above the 20 MB limit for multipart boundaries and headers. The real
+   * limit is still enforced in the route.
+   */
+  experimental: {
+    middlewareClientMaxBodySize: 25 * 1024 * 1024,
+    serverActions: {
+      // The route handler enforces the real limit; this only stops Next rejecting the body first.
+      bodySizeLimit: "25mb",
+    },
+  },
 };
 
 export default nextConfig;
