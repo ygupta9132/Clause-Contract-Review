@@ -1,22 +1,26 @@
 # How this was built, and why each choice beat the alternative
 
 A record of the decisions behind this app: what was chosen, what was rejected, and why.
-Where a decision came from a measurement, the measurement is here. Where it was a judgement
-call under a deadline, it says so.
+Where a decision came from a measurement, the measurement is here.
+
+**If you read three of these, read these three:**
+[10, chunking on clause boundaries](#10-chunking-on-clause-boundaries-not-a-fixed-window),
+[13, quote verification](#13-quote-verification-normalised-not-exact-and-not-fuzzy), and
+[8, isolation](#8-isolation-one-loader-404-not-403-and-user_id-on-every-table).
+They carry the design. The rest is supporting detail.
 
 ---
 
-# 0. The constraint that shaped everything
+# 0. Where the time went
 
-Twenty-one hours from brief to submission, realistically twelve to fourteen working hours once
-sleep and the demo recording are taken out. So the time went disproportionately into the three
-things that decide whether a contract reviewer is any good - chunking that keeps clause
-boundaries, retrieving the right clause for each question, and never reporting anything that is
-not in the document - and the UI was kept deliberately plain.
+Three things decide whether a contract reviewer is any good: chunking that keeps clause
+boundaries intact, retrieving the right clause for each question, and never reporting anything
+that is not in the document. Those got the time.
 
 **The organising principle, which every decision below serves:** nothing is reported that is not
 in the document. A model that paraphrases, tidies punctuation, or invents a plausible clause is
 caught by the server before the user sees it.
+
 ---
 
 # 1. Stack: one Next.js app, not Next plus a NestJS API
