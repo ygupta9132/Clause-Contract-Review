@@ -99,15 +99,15 @@ src/
 worker/     the queue consumer
 samples/    ten contracts to try it on
 tests/      52 of them
-docs/       decisions, the test pass, and the demo clips
+docs/       decisions, the test pass, and the demo recordings
 ```
 
 Two things in [`docs/`](docs) worth more than this README if you want the detail.
 [`decisions.md`](docs/decisions.md) is the long version: twenty decisions, what each one was
 chosen over, and the measurement behind it where there was one. [`testing.md`](docs/testing.md)
 is the pass I ran against the brief one requirement at a time, including the five defects it
-found and what I did about them. [`docs/demo/`](docs/demo) has three screen recordings of it
-running, if it is easier to watch than to set up.
+found and what I did about them. [`docs/demo/`](docs/demo) has a recording of it running and a
+short walk through the three files that matter, if that is easier than setting it up.
 
 Stack is Next.js 15, Clerk, Postgres with pgvector, Drizzle, BullMQ, Tailwind. Nothing exotic.
 Two choices worth a sentence each. The vectors stay in Postgres rather than in a separate vector
