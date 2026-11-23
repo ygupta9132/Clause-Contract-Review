@@ -1,0 +1,37 @@
+# Without this, `COPY . .` puts the local .env - Clerk secret key, model provider key - inside
+# the image, where it survives every later layer and ships with the image to anyone who pulls
+# it. Secrets reach the container at run time through env_file, never through the build.
+.env
+.env.*
+!.env.example
+
+# Not secrets, just weight and staleness. node_modules is reinstalled inside the image for the
+# right platform, and a host .next would be a build from a different environment.
+node_modules
+.next
+out
+build
+dist
+
+# Uploaded contracts belong to the host volume, not the image.
+data
+uploads
+
+.git
+.gitignore
+.github
+
+*.log
+npm-debug.log*
+coverage
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# Tests and fixtures are not needed to run the server. The sample contracts are small and are
+# kept, so a reviewer can try the app straight from the container.
+tests
