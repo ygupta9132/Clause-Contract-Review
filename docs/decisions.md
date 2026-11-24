@@ -413,15 +413,20 @@ This is the reason.
 
 ---
 
-# 16. Embedding width: 1536, measured rather than assumed
+# 16. Embedding width: 2,048, measured rather than assumed
 
 `gemini-embedding-001` returns **3,072** dimensions natively. It also honours a requested
-`dimensions`, and the app asks for **1,536**.
+`dimensions`, and the app asks for **2,048** (`EMBEDDING_DIMENSIONS`).
 
-**Why narrower:** the model is trained so a truncated vector is still a usable one, and halving
-the width halves the row size and the distance computation. On this corpus there was no
-measurable quality difference. It also drops under pgvector's 2,000-dimension ceiling, so an HNSW
-index becomes possible if cross-contract search is ever needed.
+**Why narrower:** the model is trained so a truncated vector is still a usable one, and dropping
+a third of the width cuts the row size and the distance computation by the same proportion. On
+this corpus there was no measurable quality difference.
+
+**Note this is above pgvector's 2,000-dimension ceiling for HNSW and IVFFlat**, so no ANN index
+is possible on this column as it stands. That costs nothing here, because every search is already
+filtered to one contract and the candidate set is small enough to scan exactly (section 6). If
+cross-contract search were ever added, this is the number that would have to come down to 1,536
+first.
 
 **Why measured, not assumed:** the database column type is `vector(n)`. Getting `n` wrong from
 documentation means a schema that silently disagrees with the model and fails inside an insert.
@@ -430,15 +435,18 @@ that came back.
 
 ---
 
-# 17. Testing: three suites, and what is deliberately not tested
+# 17. Testing: where a silent bug would be expensive
 
-**25 tests, in three files.**
+**52 tests, in six files.**
 
 | Suite | What it covers | Why it exists |
 |---|---|---|
-| `verify.test.ts` (11) | Quote verification, both directions | The boundary between "accepted punctuation difference" and "rejected paraphrase" is where this feature lives or dies |
-| `chunk.test.ts` (6) | Section detection, and that offsets point at the text they claim | An off-by-one produces findings that look perfect and cite the wrong span |
+| `verify.test.ts` (12) | Quote verification, both directions | The boundary between "accepted punctuation difference" and "rejected paraphrase" is where this feature lives or dies |
 | `isolation.test.ts` (8) | Every path from user B to user A's data | The production bug in section 8 |
+| `summary.test.ts` (11) | Summaries that echo the status token instead of saying something | A finding that reads "Not found in the contract. not_found" |
+| `chat-retrieval.test.ts` (10) | Matching a question to a checklist item | "Who are the parties?" returning "not covered", section 19 |
+| `chunk.test.ts` (6) | Section detection, and that offsets point at the text they claim | An off-by-one produces findings that look perfect and cite the wrong span |
+| `chat-citations.test.ts` (5) | Escaped quotes, duplicate and overlapping citations | The model emits `\"`, which rendered as garbled duplicate quotes |
 
 **Not tested, deliberately:** React components, and end-to-end browser flows. With 14 hours, tests
 go where a silent bug is expensive. A broken button is visible the first time you click it; a
